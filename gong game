@@ -1,0 +1,75 @@
+var playerL = 100;
+var playerR = 100;
+
+var ball = {
+  x: 300,
+  y: 200,
+  xspeed: 2,
+  yspeed: 2,
+
+};
+
+function setup() {
+  createCanvas(600, 400);
+}
+
+function draw() {
+  background(220);
+
+  line(width / 2, 0, width / 2, height);
+  rect(0, playerL, 15, 100);
+  rect(width - 15, playerR, 15, 100);
+  ellipse(ball.x, ball.y, 20);
+
+  if (keyIsDown(UP_ARROW)) {
+    playerR -= 10;
+  }
+
+  if (keyIsDown(DOWN_ARROW)) {
+    playerR += 10;
+  }
+
+  if (keyIsDown(65) || keyIsDown(87)) {
+    playerL -= 10;
+  }
+
+  if (keyIsDown(90) || keyIsDown(83)) {
+    playerL += 10;
+  }
+
+  ball.x += ball.xspeed;
+  ball.y += ball.yspeed;
+
+  if (ball.y < 0) {
+    ball.y = 0;
+    ball.yspeed *= -1;
+  }
+
+  if (ball.y > height) {
+    ball.y = height;
+    ball.yspeed *= -1;
+  }
+
+  if (ball.x > width) {
+    textSize(20);
+    text('Player Left Wins!!!!!', 200, 200);
+    noLoop();
+  }
+    if (ball.x > width - 15 && ball.y >= playerR && ball.y <= playerR + 100) {
+      ball.xspeed *= -1;
+    }
+
+    if (ball.x < 0) {
+      textSize(20);
+      text('Player Right Wins!!!!!', 200, 200);
+      noLoop();
+    }
+
+      if (ball.x < 15 && ball.y >= playerL && ball.y <= playerL + 100) {
+        ball.xspeed *= -1;
+
+
+      }
+    
+ 
+}
